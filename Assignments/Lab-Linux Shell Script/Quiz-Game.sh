@@ -32,6 +32,6 @@ else
     echo "Wrong! The correct answer is 2."    # User is wrong and tell them correct answer
 fi    # Close if statement
 #----------
-quizdate=$(date)
-echo "You took this quiz on $quizdate."
+quizdate=$(date)        # Obtain date on device
+echo "You took this quiz on $quizdate."        # Output date and score for user
 echo "Your score is $score out of 3."

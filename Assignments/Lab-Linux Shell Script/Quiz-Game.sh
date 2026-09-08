@@ -34,4 +34,4 @@ fi    # Close if statement
 #----------
 quizdate=$(date)
 echo "You took this quiz on $quizdate."
-echo "Your score is $score our of 3."
+echo "Your score is $score out of 3."t

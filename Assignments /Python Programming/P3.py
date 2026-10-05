@@ -1,11 +1,12 @@
 import subprocess
-import re
 
-url = "https://faridfarahmand.net/firstpage.html"
+result = subprocess.run(
+    ["curl", "-s", "https://faridfarahmand.net/firstpage.html"],
+    capture_output=True,
+    text=True
+)
 
-page = subprocess.check_output(["curl", "-s", url], text=True)
-
-match = re.search(r"Secret Code:\s*(\S+)", page, re.IGNORECASE)
-
-if match:
-    print(match.group(1))
+for line in result.stdout.splitlines():
+    if "Secret Code:" in line:
+        code = line.split("Secret Code:")[1].split("</p>")[0].strip()
+        print(code)

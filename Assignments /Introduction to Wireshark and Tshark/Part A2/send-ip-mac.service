@@ -1,0 +1,12 @@
+[Unit]
+Description=Send Raspberry Pi IP and MAC Address
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=tklahr
+ExecStart=/home/tklahr/send_ip_mac.sh
+
+[Install]
+WantedBy=multi-user.target

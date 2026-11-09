@@ -1,0 +1,13 @@
+[Unit]
+Description=EE 465 Automatic LED Blinking
+After=multi-user.target
+
+[Service]
+Type=simple
+User=tklahr
+WorkingDirectory=/home/tklahr
+ExecStart=/home/tklahr/oled-env/bin/python3 /home/tklahr/blink_led.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

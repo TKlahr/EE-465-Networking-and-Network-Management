@@ -1,1 +1,3 @@
 source ~/oled-env/bin/activate
+sudo ./remote_led.sh // run on PI terminal (waiting for ping on window terminal with remote_ping.py)
+py remote_ping.py // run on window terminal (ON, OFF, UNKNOWN)

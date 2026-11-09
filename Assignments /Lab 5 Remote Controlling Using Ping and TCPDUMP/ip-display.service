@@ -1,0 +1,15 @@
+[Unit]
+Description=EE 465 Automatic IP Address Display
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=tklahr
+WorkingDirectory=/home/tklahr
+ExecStart=/home/tklahr/oled-env/bin/python3 /home/tklahr/ip_display.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

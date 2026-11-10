@@ -29,3 +29,12 @@ sudo ./remote_led.sh
 
 GET MAC
 cat /sys/class/net/wlan0/address
+
+Ping ON
+ping -c 1 -p aaae 172.20.10.6
+
+Ping OFF
+ping -c 1 -p abae 172.20.10.6
+
+Ping UNKNOWN
+ping -c 1 -p 1234 172.20.10.6

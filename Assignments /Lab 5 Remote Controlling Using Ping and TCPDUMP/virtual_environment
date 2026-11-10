@@ -1,3 +1,22 @@
 source ~/oled-env/bin/activate
 sudo ./remote_led.sh // run on PI terminal (waiting for ping on window terminal with remote_ping.py)
 py remote_ping.py // run on window terminal (ON, OFF, UNKNOWN)
+
+Section 1
+1.4
+sudo systemctl start blink-led.service
+sudo systemctl status blink-led.service
+
+1.6
+sudo systemctl start ip-display.service
+
+Section 2
+sudo tcpdump -nni wlan0 icmp
+
+Section 3
+sudo systemctl stop blink-led.service
+sudo systemctl stop ip-display.service
+
+sudo ./remote_led.sh
+
+(On windows) py remote_ping.py

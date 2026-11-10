@@ -3,9 +3,8 @@ import busio
 import adafruit_ssd1306
 from PIL import Image, ImageDraw
 from gpiozero import Button
-import socket
+import subprocess
 import time
-import uuid
 
 # Initialize OLED
 i2c = busio.I2C(board.SCL, board.SDA)
@@ -16,22 +15,31 @@ oled = adafruit_ssd1306.SSD1306_I2C(
 # Initialize button on GPIO 17
 button = Button(17, pull_up=True, bounce_time=0.05)
 
-# Get Raspberry Pi IP address
+# Get Raspberry Pi IP address using Linux command
 def get_ip():
     try:
-        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
-            s.connect(("192.0.2.1", 80))
-            return s.getsockname()[0]
-    except OSError:
+        result = subprocess.run(
+            ["ip", "-4", "-o", "addr", "show", "wlan0"],
+            capture_output=True,
+            text=True,
+            check=True
+        )
+
+        if not result.stdout.strip():
+            return "Not Connected"
+
+        return result.stdout.split()[3].split("/")[0]
+
+    except (subprocess.CalledProcessError, OSError, IndexError):
         return "Not Connected"
 
 # Get Raspberry Pi MAC address
 def get_mac():
-    mac = uuid.getnode()
-    return ":".join(
-        f"{(mac >> i) & 0xff:02X}"
-        for i in range(40, -1, -8)
-    )
+    try:
+        with open("/sys/class/net/wlan0/address") as f:
+            return f.read().strip().upper()
+    except OSError:
+        return "Not Connected"
 
 # Continuously update display
 try:

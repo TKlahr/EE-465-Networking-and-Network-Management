@@ -13,6 +13,12 @@ sudo systemctl start ip-display.service
 Section 2
 sudo tcpdump -nni wlan0 icmp
 
+Filter only echo
+sudo tcpdump -nni wlan0 'icmp[icmptype] = icmp-echo'
+
+On windows
+ping 172.20.10.6
+
 Section 3
 sudo systemctl stop blink-led.service
 sudo systemctl stop ip-display.service

@@ -20,3 +20,6 @@ sudo systemctl stop ip-display.service
 sudo ./remote_led.sh
 
 (On windows) py remote_ping.py
+
+GET MAC
+cat /sys/class/net/wlan0/address
